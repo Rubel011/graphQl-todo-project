@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
@@ -23,13 +25,35 @@ function startServer() {
         id:ID!
         title:String!
         completed:Boolean!
+        user:User
         }
-
+        type User {
+          id:ID!
+          name:String!
+          username:String!
+        }
         type Query{
             getTodos:[Todo]
+            getAllUsers:[User]
+            getUser(id:ID!):User
         }
         `,
-            resolvers: { Query: { getTodos: () => __awaiter(this, void 0, void 0, function* () { return (yield axios.get('https://jsonplaceholder.typicode.com/todos')).data; }) } },
+            resolvers: {
+                Todo: {
+                    user: (todo) => __awaiter(this, void 0, void 0, function* () { return (yield axios.get(`https://jsonplaceholder.typicode.com/users/${todo.userId}`)).data; })
+                },
+                Query: {
+                    getTodos: () => __awaiter(this, void 0, void 0, function* () {
+                        const value = yield axios.get("https://jsonplaceholder.typicode.com/todos");
+                        return value.data;
+                    }),
+                    getAllUsers: () => __awaiter(this, void 0, void 0, function* () { return (yield axios.get("https://jsonplaceholder.typicode.com/users")).data; }),
+                    getUser: (parent, { id }) => __awaiter(this, void 0, void 0, function* () {
+                        return (yield axios.get(`https://jsonplaceholder.typicode.com/users/${id}`))
+                            .data;
+                    }),
+                },
+            },
         });
         yield server.start();
         app.use("/graphql", expressMiddleware(server));
@@ -37,7 +61,9 @@ function startServer() {
         //     const data=await axios.get('https://jsonplaceholder.typicode.com/todos')
         //     res.send(data)
         // })
-        app.listen(8080, () => { console.log("server is running at port 8080"); });
+        app.listen(8080, () => {
+            console.log("server is running at port 8080");
+        });
     });
 }
 startServer();
