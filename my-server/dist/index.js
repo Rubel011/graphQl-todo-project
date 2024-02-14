@@ -40,7 +40,9 @@ function startServer() {
         `,
             resolvers: {
                 Todo: {
-                    user: (todo) => __awaiter(this, void 0, void 0, function* () { return (yield axios.get(`https://jsonplaceholder.typicode.com/users/${todo.userId}`)).data; })
+                    user: (todo) => __awaiter(this, void 0, void 0, function* () {
+                        return (yield axios.get(`https://jsonplaceholder.typicode.com/users/${todo.userId}`)).data;
+                    }),
                 },
                 Query: {
                     getTodos: () => __awaiter(this, void 0, void 0, function* () {
