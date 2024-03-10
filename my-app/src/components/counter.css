@@ -1,0 +1,32 @@
+.counter-app {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Arial', sans-serif;
+    
+  }
+
+  .counter-value {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #333; /* Set your desired color */
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .increment-button,
+  .decrement-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #4caf50; /* Green color, you can change it */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+  }
+
+  .decrement-button {
+    background-color: #f44336; /* Red color, you can change it */
+  }

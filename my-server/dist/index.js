@@ -47,6 +47,7 @@ function startServer() {
                 Query: {
                     getTodos: () => __awaiter(this, void 0, void 0, function* () {
                         const value = yield axios.get("https://jsonplaceholder.typicode.com/todos");
+                        // console.log(value.data);
                         return value.data;
                     }),
                     getAllUsers: () => __awaiter(this, void 0, void 0, function* () { return (yield axios.get("https://jsonplaceholder.typicode.com/users")).data; }),
