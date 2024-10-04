@@ -5,6 +5,7 @@ import UploadImage from "../components/UploadImage";
 import Counter from "../components/Counter";
 import CountryDropDown from "../components/CountryDropDown";
 import YouTubeForm from "../components/YouTubeForm";
+import FormController from "../components/FormController";
 function AllRoute() {
   return (
     <Routes>
@@ -12,7 +13,8 @@ function AllRoute() {
       <Route path="/file-upload" element={<UploadImage />} />
       <Route path="/counter" element={<Counter />} />
       <Route path="/country" element={<CountryDropDown />} />
-      <Route path="/form" element={<YouTubeForm />} />
+      <Route path="/form/:id" element={<YouTubeForm />} />
+      <Route path="/form-con" element={<FormController />} />
     </Routes>
   );
 }

@@ -1,4 +1,3 @@
-import "./App.css";
 import { useQuery, gql } from "@apollo/client";
 import { useEffect } from "react";
 import AllRoute from "./routes/AllRoute";

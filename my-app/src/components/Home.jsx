@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
 function HomePage() {
-  return (
-    <div>This is the home page here you can find all the details for the other pages</div>
-  )
+  return <div>{useSelector((state) => state.counter)}</div>;
 }
 
-export default HomePage
+export default HomePage;
